@@ -1,6 +1,7 @@
 class AngleList
 {
   int totalSectors;
+  int totalSets;
   String type;
   float[] angles;
   float minimumAngle = 0;
@@ -8,6 +9,7 @@ class AngleList
   AngleList(int _totalSectors, String _type)
   {
     totalSectors = _totalSectors;
+    totalSets = totalSectors / 2;
     type = _type;
     calculateAngles();
   }
@@ -21,6 +23,9 @@ class AngleList
         break;
       case "random":
         angles = calculateRandomAngles();
+        break;
+      case "parametric":
+        angles = calculateParametricAngles();
         break;
     }
   }
@@ -46,16 +51,27 @@ class AngleList
     return _angles;
   }
   
+  float[] calculateParametricAngles()
+  {
+    float[] _angles = new float[totalSectors];
+    for (int i = 0; i < totalSets; i++)
+    {
+      _angles[2 * i] = 1 - cos((2 * i) * TWO_PI / totalSectors);
+      _angles[2 * i + 1] = 1 - cos((2 * i + 1) * TWO_PI / totalSectors);
+    }
+    _angles = makeCyclical(_angles);
+    return _angles;
+  }
+  
   float[] makeCyclical(float[] _angles)
   {
-    int sets = totalSectors / 2;
-    float[] clockwiseAngles = new float[sets];
-    float[] anticlockwiseAngles = new float[sets];
+    float[] clockwiseAngles = new float[totalSets];
+    float[] anticlockwiseAngles = new float[totalSets];
     float fullCycle = TWO_PI - (totalSectors * minimumAngle);
     float clockwiseMultiplier = 0;
     float anticlockwiseMultiplier = 0;
     
-    for (int i = 0; i < sets; i++)
+    for (int i = 0; i < totalSets; i++)
     {
       clockwiseAngles[i] = _angles[2 * i];
       anticlockwiseAngles[i] = _angles[2 * i + 1];
@@ -67,7 +83,7 @@ class AngleList
     clockwiseMultiplier = (fullCycle / 2) / clockwiseMultiplier;
     anticlockwiseMultiplier = (fullCycle / 2) / anticlockwiseMultiplier;
     
-    for (int i = 0; i < sets; i++)
+    for (int i = 0; i < totalSets; i++)
     {
       _angles[2 * i] = minimumAngle + (clockwiseAngles[i] * clockwiseMultiplier);
       _angles[2 * i + 1] = minimumAngle + (anticlockwiseAngles[i] * anticlockwiseMultiplier);
