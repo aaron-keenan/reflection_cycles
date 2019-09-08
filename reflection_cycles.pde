@@ -16,9 +16,16 @@ void setup() {
   //movie.volume(0);
 }
 
-//void draw() {
+void keyReleased() {
+  CurrentDate currentDate = new CurrentDate();
+  if (key == RETURN | key == ENTER) {
+    save("output/reflection-cycles-"+currentDate.toString()+".png");
+  }
+}
 
-//}
+void draw() {
+
+}
 
 //void movieEvent(Movie m) {
 //  m.read();
