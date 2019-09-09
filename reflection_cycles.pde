@@ -16,13 +16,14 @@ void setup() {
   //movie.volume(0);
 }
 
-void keyReleased() {
+void keyPressed() {
   CurrentDate currentDate = new CurrentDate();
   if (key == RETURN | key == ENTER) {
     save("output/reflection-cycles-"+currentDate.toString()+".png");
   }
 }
 
+// Must exist to process key press events 
 void draw() {
 
 }

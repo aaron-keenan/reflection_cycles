@@ -6,11 +6,11 @@ class CurrentDate
   int hour = hour();
   int minute = minute();
   int second = second();
-  String now;
+  String dateString;
   
   CurrentDate()
   {
-    now = nf(year, 4)
+    dateString = nf(year, 4)
       + "-"
       + nf(month, 2)
       + "-"
@@ -23,6 +23,6 @@ class CurrentDate
   
   String toString()
   {
-    return now;
+    return dateString;
   }
 }
