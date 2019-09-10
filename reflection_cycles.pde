@@ -9,7 +9,7 @@ ReflectionCycle reflectionCycle;
 void setup() {
   photo = loadImage("peacock.jpg");
   size(800, 800);
-  reflectionCycle = new ReflectionCycle(16, "parametric");
+  reflectionCycle = new ReflectionCycle(16, "fibonacci");
   //movie = new Movie(this, "example.mp4");
   //movie.loop();
   //movie.read();

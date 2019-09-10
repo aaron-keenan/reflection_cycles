@@ -11,6 +11,7 @@ class AngleList
     totalSectors = _totalSectors;
     totalSets = totalSectors / 2;
     type = _type;
+    angles = new float[totalSectors];
     calculateAngles();
   }
   
@@ -19,51 +20,63 @@ class AngleList
     switch (type)
     {
       case "uniform":
-        angles = calculateUniformAngles();
+        calculateUniformAngles();
         break;
       case "random":
-        angles = calculateRandomAngles();
+        calculateRandomAngles();
         break;
       case "parametric":
-        angles = calculateParametricAngles();
+        calculateParametricAngles();
+        break;
+      case "fibonacci":
+        calculateFibonacciAngles();
         break;
     }
+    makeCyclical();
   }
   
-  float[] calculateUniformAngles()
+  void calculateUniformAngles()
   {
-    float[] _angles = new float[totalSectors];
     for (int i = 0; i < totalSectors; i++)
     {
-      _angles[i] = TWO_PI / totalSectors;
+      angles[i] = TWO_PI / totalSectors;
     }
-    return _angles;
   }
   
-  float[] calculateRandomAngles()
+  void calculateRandomAngles()
   {
-    float[] _angles = new float[totalSectors];
     for (int i = 0; i < totalSectors; i++)
     {
-      _angles[i] = random(1);
+      angles[i] = random(1);
     }
-    _angles = makeCyclical(_angles);
-    return _angles;
   }
   
-  float[] calculateParametricAngles()
+  void calculateParametricAngles()
   {
-    float[] _angles = new float[totalSectors];
     for (int i = 0; i < totalSets; i++)
     {
-      _angles[2 * i] = 1 - cos((2 * i) * TWO_PI / totalSectors);
-      _angles[2 * i + 1] = 1 - cos((2 * i + 1) * TWO_PI / totalSectors);
+      angles[2 * i] = 1 - cos((2 * i) * TWO_PI / totalSectors);
+      angles[2 * i + 1] = 1 - cos((2 * i + 1) * TWO_PI / totalSectors);
     }
-    _angles = makeCyclical(_angles);
-    return _angles;
   }
   
-  float[] makeCyclical(float[] _angles)
+  void calculateFibonacciAngles()
+  {
+    int current = 2;
+    int previous = 1;
+    
+    for (int i = 0; i < totalSets; i++)
+    {
+      if (i > 1) {
+        current += previous;
+        previous = current - previous;
+      }
+      angles[2 * i] = previous;
+      angles[2 * i + 1] = current;
+    }
+  }
+  
+  void makeCyclical()
   {
     float[] clockwiseAngles = new float[totalSets];
     float[] anticlockwiseAngles = new float[totalSets];
@@ -73,8 +86,8 @@ class AngleList
     
     for (int i = 0; i < totalSets; i++)
     {
-      clockwiseAngles[i] = _angles[2 * i];
-      anticlockwiseAngles[i] = _angles[2 * i + 1];
+      clockwiseAngles[i] = angles[2 * i];
+      anticlockwiseAngles[i] = angles[2 * i + 1];
       
       clockwiseMultiplier += clockwiseAngles[i];
       anticlockwiseMultiplier += anticlockwiseAngles[i];
@@ -85,10 +98,8 @@ class AngleList
     
     for (int i = 0; i < totalSets; i++)
     {
-      _angles[2 * i] = minimumAngle + (clockwiseAngles[i] * clockwiseMultiplier);
-      _angles[2 * i + 1] = minimumAngle + (anticlockwiseAngles[i] * anticlockwiseMultiplier);
+      angles[2 * i] = minimumAngle + (clockwiseAngles[i] * clockwiseMultiplier);
+      angles[2 * i + 1] = minimumAngle + (anticlockwiseAngles[i] * anticlockwiseMultiplier);
     }
-    
-    return _angles;
   }
 }

@@ -35,6 +35,7 @@ class Sector
     sector = createGraphics(photo.width, photo.height);
     sector.beginDraw();
     sector.stroke(255);
+    sector.strokeWeight(0.5);
     sector.translate(width/2,height/2);
     sector.rotate(relativeRotation);
     sector.beginShape();
