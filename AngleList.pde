@@ -3,7 +3,7 @@ class AngleList
   int totalSectors;
   int totalSets;
   String type;
-  float[] angles;
+  FloatList angles;
   float minimumAngle = 0;
   
   AngleList(int _totalSectors, String _type)
@@ -11,7 +11,7 @@ class AngleList
     totalSectors = _totalSectors;
     totalSets = totalSectors / 2;
     type = _type;
-    angles = new float[totalSectors];
+    angles = new FloatList();
     calculateAngles();
   }
   
@@ -39,7 +39,7 @@ class AngleList
   {
     for (int i = 0; i < totalSectors; i++)
     {
-      angles[i] = TWO_PI / totalSectors;
+      angles.append(TWO_PI / totalSectors);
     }
   }
   
@@ -47,7 +47,7 @@ class AngleList
   {
     for (int i = 0; i < totalSectors; i++)
     {
-      angles[i] = random(1);
+      angles.append(random(1));
     }
   }
   
@@ -55,8 +55,8 @@ class AngleList
   {
     for (int i = 0; i < totalSets; i++)
     {
-      angles[2 * i] = 1 - cos((2 * i) * TWO_PI / totalSectors);
-      angles[2 * i + 1] = 1 - cos((2 * i + 1) * TWO_PI / totalSectors);
+      angles.append(1 - cos((2 * i) * TWO_PI / totalSectors));
+      angles.append(1 - cos((2 * i + 1) * TWO_PI / totalSectors));
     }
   }
   
@@ -71,9 +71,10 @@ class AngleList
         current += previous;
         previous = current - previous;
       }
-      angles[2 * i] = previous;
-      angles[2 * i + 1] = current;
+      angles.append(previous);
+      angles.append(current);
     }
+    angles.shuffle();
   }
   
   void makeCyclical()
@@ -86,8 +87,8 @@ class AngleList
     
     for (int i = 0; i < totalSets; i++)
     {
-      clockwiseAngles[i] = angles[2 * i];
-      anticlockwiseAngles[i] = angles[2 * i + 1];
+      clockwiseAngles[i] = angles.get(2 * i);
+      anticlockwiseAngles[i] = angles.get(2 * i + 1);
       
       clockwiseMultiplier += clockwiseAngles[i];
       anticlockwiseMultiplier += anticlockwiseAngles[i];
@@ -96,10 +97,11 @@ class AngleList
     clockwiseMultiplier = (fullCycle / 2) / clockwiseMultiplier;
     anticlockwiseMultiplier = (fullCycle / 2) / anticlockwiseMultiplier;
     
+    angles = new FloatList();
     for (int i = 0; i < totalSets; i++)
     {
-      angles[2 * i] = minimumAngle + (clockwiseAngles[i] * clockwiseMultiplier);
-      angles[2 * i + 1] = minimumAngle + (anticlockwiseAngles[i] * anticlockwiseMultiplier);
+      angles.append(minimumAngle + (clockwiseAngles[i] * clockwiseMultiplier));
+      angles.append(minimumAngle + (anticlockwiseAngles[i] * anticlockwiseMultiplier));
     }
   }
 }
