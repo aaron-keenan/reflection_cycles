@@ -3,13 +3,14 @@ import processing.video.*;
 PImage photo;
 Movie movie;
 PGraphics maskImage;
+FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
 
 ReflectionCycle reflectionCycle;
 
 void setup() {
   photo = loadImage("peacock.jpg");
   size(800, 800);
-  reflectionCycle = new ReflectionCycle(16, "fibonacci");
+  reflectionCycle = new ReflectionCycle(16, "set");
   //movie = new Movie(this, "example.mp4");
   //movie.loop();
   //movie.read();

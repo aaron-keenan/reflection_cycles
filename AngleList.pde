@@ -3,15 +3,18 @@ class AngleList
   int totalSectors;
   int totalSets;
   String type;
-  FloatList angles;
+  FloatList angles = new FloatList();
   float minimumAngle = 0;
   
   AngleList(int _totalSectors, String _type)
   {
-    totalSectors = _totalSectors;
-    totalSets = totalSectors / 2;
     type = _type;
-    angles = new FloatList();
+    if (type == "set") {
+      totalSectors = setAngleList.size();
+    } else {
+      totalSectors = _totalSectors;
+    }
+    totalSets = totalSectors / 2;
     calculateAngles();
   }
   
@@ -30,6 +33,9 @@ class AngleList
         break;
       case "fibonacci":
         calculateFibonacciAngles();
+        break;
+      case "set":
+        angles = setAngleList;
         break;
     }
     makeCyclical();
