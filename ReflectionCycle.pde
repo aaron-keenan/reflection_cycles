@@ -2,21 +2,22 @@ class ReflectionCycle
 {
   float absoluteRotation = 0;
   float relativeRotation = 1.9;
-  AngleList angleList;
+  Sector[] sectors;
   
-  ReflectionCycle(int totalSectors, String type)
+  ReflectionCycle()
   {
-    angleList = new AngleList(totalSectors, type);
-    println(angleList.angles);
+    background(255);
+    sectors = new Sector[totalSectors];
     generateSectors();
   }
   
   void generateSectors()
   {
     boolean mirror = false;
+    int i = 0;
     for (float angle : angleList.angles) {
       // println(relativeRotation);
-      Sector sector = new Sector(angle, relativeRotation, mirror);
+      sectors[i] = new Sector(angle, relativeRotation, mirror, showSkeleton);
       translate(width/2, height/2);
       rotate(angle);
       translate(-width/2, -height/2);
@@ -26,6 +27,7 @@ class ReflectionCycle
         relativeRotation += angle;
       }
       mirror = !mirror;
+      i++;
     }
   }
 }
