@@ -11,5 +11,5 @@ Irregular reflection cycle generator using Processing.
 ## Fibonacci
 ![Irregular reflection example with sector angles based on Fibonacci numbers (left) and sector diagram (right)](https://raw.githubusercontent.com/aaron-keenan/reflection_cycles/master/documentation/images/fibonacci.jpg)
 
-## Random
+## Parametric
 ![Irregular reflection example with sector angles based on a sin curve (left) and sector diagram (right)](https://raw.githubusercontent.com/aaron-keenan/reflection_cycles/master/documentation/images/parametric.jpg)
