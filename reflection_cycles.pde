@@ -4,13 +4,14 @@ PImage photo;
 Movie movie;
 PGraphics maskImage;
 AngleList angleList;
+ReflectionCycle reflectionCycle;
 FloatList setAngleList;
 // FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
-int totalSectors = 12;
-String type = "fibonacci";
+// Even number
+int totalSectors = 10;
+// "uniform" / "random" / "parametric" / "fibonacci"
+String type = "random";
 boolean showSkeleton = false;
-
-ReflectionCycle reflectionCycle;
 
 void setup() {
   photo = loadImage("peacock.jpg");
@@ -46,9 +47,8 @@ void keyReleased() {
   }
 }
 
-// Must exist to process key press events 
 void draw() {
-
+  // Must exist to process key press events
 }
 
 //void movieEvent(Movie m) {
