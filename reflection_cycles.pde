@@ -5,12 +5,18 @@ Movie movie;
 PGraphics maskImage;
 AngleList angleList;
 ReflectionCycle reflectionCycle;
-FloatList setAngleList;
-// FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
+
 // Even number
 int totalSectors = 10;
+
+// Options for regular or irregular sector angle size sequences
 // "uniform" / "random" / "parametric" / "fibonacci"
 String type = "random";
+
+// Option to set hard-coded list of angle sizes
+// FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
+FloatList setAngleList;
+
 boolean showSkeleton = false;
 
 void setup() {
