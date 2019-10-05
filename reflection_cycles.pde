@@ -1,35 +1,57 @@
 import processing.video.*;
 
-PImage photo;
-Movie movie;
-PGraphics maskImage;
-AngleList angleList;
-ReflectionCycle reflectionCycle;
+// "video" / "image"
+String mediaType = "video";
+
+// Video or image file within "media" directory
+String mediaFile = "gibraltar-point.mp4";
 
 // Even number
-int totalSectors = 10;
+int totalSectors = 24;
 
 // Options for regular or irregular sector angle size sequences
 // "uniform" / "random" / "parametric" / "fibonacci"
-String type = "random";
+String type = "parametric";
 
 // Option to set hard-coded list of angle sizes
 // FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
 FloatList setAngleList;
 
+PImage media;
+PImage photo;
+Movie video;
+PGraphics maskImage;
+AngleList angleList;
+ReflectionCycle reflectionCycle;
+int videoFrameRate = 30;
 boolean showSkeleton = false;
 
 void setup() {
-  photo = loadImage("peacock.jpg");
-  size(800, 800);
+  size(1080, 1080);
+  frameRate(videoFrameRate);
+  
   angleList = new AngleList(totalSectors, type);
   println(angleList.angles);
-  reflectionCycle = new ReflectionCycle();
-  //movie = new Movie(this, "example.mp4");
-  //movie.loop();
-  //movie.read();
-  //movie.volume(0);
+  
+  setupMedia();
 }
+
+void setupMedia()
+{  
+  switch (mediaType)
+  {
+    case "photo":
+      photo = loadImage(mediaFile);
+      reflectionCycle = new ReflectionCycle();
+      break;
+    case "video":
+      video = new Movie(this, mediaFile);
+      video.volume(0);
+      video.frameRate(videoFrameRate);
+      video.play();
+      break;
+  }
+} 
 
 void switchSkeletonMode()
 {
@@ -54,9 +76,14 @@ void keyReleased() {
 }
 
 void draw() {
-  // Must exist to process key press events
-}
+  if (mediaType != "video") {
+    return;
+  }
 
-//void movieEvent(Movie m) {
-//  m.read();
-//}
+  if (video.available()) {
+    video.pause();
+    video.read();
+    reflectionCycle = new ReflectionCycle();
+    video.play();
+  }
+}

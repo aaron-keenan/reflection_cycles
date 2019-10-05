@@ -4,7 +4,7 @@ class AngleList
   int totalSets;
   String type;
   FloatList angles = new FloatList();
-  float minimumAngle = 0;
+  float minimumAngle = radians(2);
   
   AngleList(int _totalSectors, String _type)
   {

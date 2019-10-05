@@ -1,12 +1,13 @@
 class ReflectionCycle
 {
   float absoluteRotation = 0;
-  float relativeRotation = 1.9;
+  float relativeRotation = 1.7;
   Sector[] sectors;
   
   ReflectionCycle()
   {
     background(255);
+    blendMode(BLEND);
     sectors = new Sector[totalSectors];
     generateSectors();
   }
