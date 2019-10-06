@@ -1,4 +1,5 @@
 import processing.video.*;
+import com.hamoid.*; // video export
 
 // "video" / "image"
 String mediaType = "video";
@@ -20,11 +21,13 @@ FloatList setAngleList;
 PImage media;
 PImage photo;
 Movie video;
+VideoExport videoExport;
 PGraphics maskImage;
 AngleList angleList;
 ReflectionCycle reflectionCycle;
 int videoFrameRate = 30;
 boolean showSkeleton = false;
+CurrentDate currentDate = new CurrentDate();
 
 void setup() {
   size(1080, 1080);
@@ -49,6 +52,10 @@ void setupMedia()
       video.volume(0);
       video.frameRate(videoFrameRate);
       video.play();
+      videoExport = new VideoExport(this);
+      videoExport.setFrameRate(videoFrameRate);
+      videoExport.setMovieFileName("output/reflection-cycles-"+currentDate.toString()+".mp4");
+      videoExport.startMovie();
       break;
   }
 } 
@@ -60,12 +67,15 @@ void switchSkeletonMode()
 }
 
 void keyPressed() {
-  CurrentDate currentDate = new CurrentDate();
   if (key == RETURN | key == ENTER) {
     save("output/reflection-cycles-"+currentDate.toString()+".png");
   }
   if (key == 's' && showSkeleton == false) {
     switchSkeletonMode();
+  }
+  if (key == 'q' && mediaType == "video") {
+    videoExport.endMovie();
+    exit();
   }
 }
 
@@ -84,6 +94,7 @@ void draw() {
     video.pause();
     video.read();
     reflectionCycle = new ReflectionCycle();
+    videoExport.saveFrame();
     video.play();
   }
 }
