@@ -1,7 +1,7 @@
 class ReflectionCycle
 {
-  float absoluteRotation = 0;
-  float relativeRotation = 1.7;
+  float absoluteRotation = radians(0);
+  float relativeRotation = radians(135);
   Sector[] sectors;
   
   ReflectionCycle()
