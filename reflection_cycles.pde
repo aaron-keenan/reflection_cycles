@@ -8,11 +8,11 @@ String mediaType = "video";
 String mediaFile = "gibraltar-point.mp4";
 
 // Even number
-int totalSectors = 24;
+int totalSectors = 28;
 
 // Options for regular or irregular sector angle size sequences
 // "uniform" / "random" / "parametric" / "fibonacci"
-String type = "parametric";
+String type = "random";
 
 // Option to set hard-coded list of angle sizes
 // FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
@@ -26,11 +26,12 @@ PGraphics maskImage;
 AngleList angleList;
 ReflectionCycle reflectionCycle;
 int videoFrameRate = 30;
+int exportFrameRate = 20;
 boolean showSkeleton = false;
 CurrentDate currentDate = new CurrentDate();
 
 void setup() {
-  size(1080, 1080);
+  size(1500, 1500);
   frameRate(videoFrameRate);
   
   angleList = new AngleList(totalSectors, type);
@@ -53,7 +54,7 @@ void setupMedia()
       video.frameRate(videoFrameRate);
       video.play();
       videoExport = new VideoExport(this);
-      videoExport.setFrameRate(videoFrameRate);
+      videoExport.setFrameRate(exportFrameRate);
       videoExport.setMovieFileName("output/reflection-cycles-"+currentDate.toString()+".mp4");
       videoExport.startMovie();
       break;
