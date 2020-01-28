@@ -2,6 +2,7 @@ class AngleList
 {
   int totalSectors;
   int totalSets;
+  int perlinNoiseDetail = 3;
   String type;
   FloatList angles = new FloatList();
   float minimumAngle = radians(2);
@@ -27,6 +28,9 @@ class AngleList
         break;
       case "random":
         calculateRandomAngles();
+        break;
+      case "perlin":
+        calculatePerlinAngles();
         break;
       case "parametric":
         calculateParametricAngles();
@@ -54,6 +58,15 @@ class AngleList
     for (int i = 0; i < totalSectors; i++)
     {
       angles.append(random(1));
+    }
+  }
+  
+  void calculatePerlinAngles()
+  {
+    noiseDetail(perlinNoiseDetail);
+    for (int i = 0; i < totalSectors; i++)
+    {
+      angles.append(noise(i));
     }
   }
   

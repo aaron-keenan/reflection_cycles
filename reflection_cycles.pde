@@ -11,8 +11,8 @@ String mediaFile = "gibraltar-point.mp4";
 int totalSectors = 28;
 
 // Options for regular or irregular sector angle size sequences
-// "uniform" / "random" / "parametric" / "fibonacci"
-String type = "random";
+// "uniform" / "random" / "perlin" / "parametric" / "fibonacci"
+String type = "perlin";
 
 // Option to set hard-coded list of angle sizes
 // FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
