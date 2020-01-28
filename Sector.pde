@@ -34,9 +34,10 @@ class Sector
     float controlY1 = -radius * controlMultiplier * cos(sectorSize/3);
     float controlX2 = radius * controlMultiplier * sin(2*sectorSize/3);
     float controlY2 = -radius * controlMultiplier * cos(2*sectorSize/3);
-    
+
     sector = createGraphics(media.width, media.height);
     sector.beginDraw();
+    sector.translate(-mediaOffsetX, -mediaOffsetY);
     sector.fill(getFillColour());
     sector.stroke(getStrokeColour(), getStrokeOpacity());
     sector.strokeWeight(getStrokeWeight());
@@ -83,9 +84,9 @@ class Sector
     }
     if (mirror) {
       scale(-1.0, 1.0);
-      image(imageContent, -width, 0, imageContent.width, imageContent.height);
+      image(imageContent, -width + mediaOffsetX, mediaOffsetY, imageContent.width, imageContent.height);
     } else {
-      image(imageContent, 0, 0, imageContent.width, imageContent.height);
+      image(imageContent, mediaOffsetX, mediaOffsetY, imageContent.width, imageContent.height);
     }
   }
   

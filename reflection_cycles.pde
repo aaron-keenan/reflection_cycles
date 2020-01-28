@@ -18,6 +18,10 @@ String type = "perlin";
 // FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
 FloatList setAngleList;
 
+// Media position
+int mediaOffsetX = 700;
+int mediaOffsetY = 700;
+
 PImage media;
 PImage photo;
 Movie video;
