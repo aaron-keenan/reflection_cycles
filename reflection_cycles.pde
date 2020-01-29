@@ -8,7 +8,7 @@ String mediaType = "video";
 String mediaFile = "gibraltar-point.mp4";
 
 // Even number
-int totalSectors = 28;
+int totalSectors = 24;
 
 // Options for regular or irregular sector angle size sequences
 // "uniform" / "random" / "perlin" / "parametric" / "fibonacci"
@@ -21,6 +21,13 @@ FloatList setAngleList;
 // Media position
 int mediaOffsetX = 700;
 int mediaOffsetY = 700;
+
+// Centre point position
+// Pass either coordinates or coordinateDescription to CentrePoint
+// StringList("left"/"centre"/"right", "top"/"centre"/"bottom")
+FloatList coordinates = new FloatList(50, 50);
+StringList coordinateDescription = new StringList("centre", "centre");
+CentrePoint centrePoint;
 
 PImage media;
 PImage photo;
@@ -38,6 +45,7 @@ void setup() {
   size(1500, 1500);
   frameRate(videoFrameRate);
   
+  centrePoint = new CentrePoint(coordinateDescription);
   angleList = new AngleList(totalSectors, type);
   println(angleList.angles);
   
