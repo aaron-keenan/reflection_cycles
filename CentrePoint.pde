@@ -2,23 +2,33 @@ class CentrePoint
 {
   float x = 0;
   float y = 0;
+  String xString;
+  String yString;
   
-  CentrePoint(FloatList coordinates)
+  CentrePoint(float _x, float _y)
   {
-    x = coordinates.get(0);
-    y = coordinates.get(1);
-    printCoordinates();
+    x = _x;
+    y = _y;
   }
   
-  CentrePoint(StringList coordinates)
+  CentrePoint(String _xString, String _yString)
   {
-    x = getXCoordinate(coordinates.get(0));
-    y = getYCoordinate(coordinates.get(1));
-    printCoordinates();
+    xString = _xString;
+    yString = _yString;
   }
   
-  float getXCoordinate(String xString)
+  void calculateCentre()
   {
+    x = getXCoordinate();
+    y = getYCoordinate();
+  }
+  
+  float getXCoordinate()
+  {
+    if (xString == null) {
+      return x;
+    }
+    
     switch(xString) {
       case "left": 
         return 0;
@@ -27,11 +37,16 @@ class CentrePoint
       case "right": 
         return width;
     }
+    
     return 0;
   }
   
-  float getYCoordinate(String yString)
+  float getYCoordinate()
   {
+    if (yString == null) {
+      return y;
+    }
+    
     switch(yString) {
       case "top": 
         return 0;
@@ -40,6 +55,7 @@ class CentrePoint
       case "bottom": 
         return height;
     }
+    
     return 0;
   }
   

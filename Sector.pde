@@ -41,7 +41,7 @@ class Sector
     sector.fill(getFillColour());
     sector.stroke(getStrokeColour(), getStrokeOpacity());
     sector.strokeWeight(getStrokeWeight());
-    sector.translate(width/2, height/2);
+    sector.translate(centrePoint.x, centrePoint.y);
     sector.beginShape();
     sector.rotate(relativeRotation/2);
     sector.vertex(-0.75, 0.5);
@@ -63,13 +63,13 @@ class Sector
   void reposition()
   {
     pushMatrix();
-      translate(width/2, height/2);
+      translate(centrePoint.x, centrePoint.y);
       if (mirror) {
         rotate(relativeRotation);
       } else {
         rotate(-relativeRotation);
       }
-      translate(-width/2, -height/2);
+      translate(-centrePoint.x, -centrePoint.y);
       makeSectorImage();
     popMatrix();
   }
@@ -84,7 +84,7 @@ class Sector
     }
     if (mirror) {
       scale(-1.0, 1.0);
-      image(imageContent, -width + mediaOffsetX, mediaOffsetY, imageContent.width, imageContent.height);
+      image(imageContent, -(2 * centrePoint.x) + mediaOffsetX, mediaOffsetY, imageContent.width, imageContent.height);
     } else {
       image(imageContent, mediaOffsetX, mediaOffsetY, imageContent.width, imageContent.height);
     }

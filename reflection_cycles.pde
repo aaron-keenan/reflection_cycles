@@ -19,15 +19,13 @@ String type = "perlin";
 FloatList setAngleList;
 
 // Media position
-int mediaOffsetX = 700;
-int mediaOffsetY = 700;
+int mediaOffsetX = 0;
+int mediaOffsetY = 0;
 
 // Centre point position
-// Pass either coordinates or coordinateDescription to CentrePoint
-// StringList("left"/"centre"/"right", "top"/"centre"/"bottom")
-FloatList coordinates = new FloatList(50, 50);
-StringList coordinateDescription = new StringList("centre", "centre");
-CentrePoint centrePoint;
+// Pass either numeric or descriptive coordinates to CentrePoint
+// (0, 0) or ("left"/"centre"/"right", "top"/"centre"/"bottom")
+CentrePoint centrePoint = new CentrePoint("centre", "centre");
 
 PImage media;
 PImage photo;
@@ -44,10 +42,11 @@ CurrentDate currentDate = new CurrentDate();
 void setup() {
   size(1500, 1500);
   frameRate(videoFrameRate);
-  
-  centrePoint = new CentrePoint(coordinateDescription);
+
+  centrePoint.calculateCentre();
+  centrePoint.printCoordinates();
   angleList = new AngleList(totalSectors, type);
-  println(angleList.angles);
+  angleList.printAngles();
   
   setupMedia();
 }

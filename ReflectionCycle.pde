@@ -19,9 +19,9 @@ class ReflectionCycle
     for (float angle : angleList.angles) {
       // println(relativeRotation);
       sectors[i] = new Sector(angle, relativeRotation, mirror, showSkeleton);
-      translate(width/2, height/2);
+      translate(centrePoint.x, centrePoint.y);
       rotate(angle);
-      translate(-width/2, -height/2);
+      translate(-centrePoint.x, -centrePoint.y);
       if (mirror) {
         relativeRotation -= angle;
       } else {

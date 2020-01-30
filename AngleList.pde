@@ -123,4 +123,9 @@ class AngleList
       angles.append(minimumAngle + (anticlockwiseAngles[i] * anticlockwiseMultiplier));
     }
   }
+  
+  void printAngles()
+  {
+    println(angles);
+  }
 }
