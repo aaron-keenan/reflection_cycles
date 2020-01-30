@@ -1,7 +1,6 @@
 class Sector
 {
   PGraphics sector;
-  float startAngle;
   float sectorSize;
   float relativeRotation;
   boolean mirror;

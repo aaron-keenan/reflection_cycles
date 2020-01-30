@@ -1,7 +1,5 @@
 class ReflectionCycle
 {
-  float absoluteRotation = radians(0);
-  float relativeRotation = radians(135);
   Sector[] sectors;
   
   ReflectionCycle()
@@ -9,7 +7,15 @@ class ReflectionCycle
     background(255);
     blendMode(BLEND);
     sectors = new Sector[totalSectors];
+    rotateToStartAngle();
     generateSectors();
+  }
+  
+  void rotateToStartAngle()
+  {
+    translate(centrePoint.x, centrePoint.y);
+    rotate(startRotation);
+    translate(-centrePoint.x, -centrePoint.y);
   }
   
   void generateSectors()

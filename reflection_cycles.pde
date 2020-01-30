@@ -18,6 +18,12 @@ String type = "perlin";
 // FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
 FloatList setAngleList;
 
+// Rotation angle of first radial
+float startRotation = radians(0);
+
+// Rotation angle of background image
+float relativeRotation = radians(135);
+
 // Media position
 int mediaOffsetX = 0;
 int mediaOffsetY = 0;
