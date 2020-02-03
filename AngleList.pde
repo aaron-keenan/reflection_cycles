@@ -100,7 +100,7 @@ class AngleList
   {
     float[] clockwiseAngles = new float[totalSets];
     float[] anticlockwiseAngles = new float[totalSets];
-    float fullCycle = TWO_PI - (totalSectors * minimumAngle);
+    float fullCycle = (totalRotations * TWO_PI) - (totalSectors * minimumAngle);
     float clockwiseMultiplier = 0;
     float anticlockwiseMultiplier = 0;
     

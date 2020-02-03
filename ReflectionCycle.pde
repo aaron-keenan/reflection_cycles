@@ -5,7 +5,7 @@ class ReflectionCycle
   ReflectionCycle()
   {
     background(255);
-    blendMode(BLEND);
+    blendMode(blendMode);
     sectors = new Sector[totalSectors];
     rotateToStartAngle();
     generateSectors();

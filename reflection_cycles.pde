@@ -12,7 +12,7 @@ int totalSectors = 24;
 
 // Options for regular or irregular sector angle size sequences
 // "uniform" / "random" / "perlin" / "parametric" / "fibonacci"
-String type = "perlin";
+String type = "fibonacci";
 
 // Option to set hard-coded list of angle sizes
 // FloatList setAngleList = new FloatList(1, 1, 2, 2, 3, 3, 4, 4);
@@ -26,12 +26,16 @@ float relativeRotation = radians(135);
 
 // Media position
 int mediaOffsetX = 0;
-int mediaOffsetY = 0;
+int mediaOffsetY = 750;
 
 // Centre point position
 // Pass either numeric or descriptive coordinates to CentrePoint
 // (0, 0) or ("left"/"centre"/"right", "top"/"centre"/"bottom")
 CentrePoint centrePoint = new CentrePoint("centre", "centre");
+
+// Options for multiple rotations with blend mode for overlapping layers
+int totalRotations = 1;
+int blendMode = BLEND;
 
 PImage media;
 PImage photo;
